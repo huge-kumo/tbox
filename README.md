@@ -1,5 +1,4 @@
 
-```shell
-sudo ln tbox.sh  /usr/local/bin/tbox
-brew install qrencode
-```
+- 提供当前目录http静态资源访问服务
+- 提供快速创建go测试代码服务
+- 提供查询天气服务

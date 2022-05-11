@@ -1,5 +1,5 @@
 #!/bin/bash
- 
+
 # go context: $2 is lab type
 if [ "$1" == "code" ]; then
     cmd_output=$(mktemp -d)
