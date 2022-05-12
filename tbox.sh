@@ -1,14 +1,33 @@
 #!/bin/bash
 
-# go context: $2 is lab type
+# code context
 if [ "$1" == "code" ]; then
+    # save mode
+    if [ "$2" == "save" ]; then
+        lab_path="$HOME/Laboratory"
+        if [ ! -d "$lab_path" ]; then
+            mkdir $lab_path
+        fi
+        
+        dst_path=$lab_path/${PWD##*/}
+        if [ -d "$dst_path" ]; then
+            dst_path=$dst_path$(date +%s)
+        fi
+        mkdir $dst_path
+        cp -R *  $dst_path
+        exit 0
+    fi
+
+    # create temporary dir mode
     cmd_output=$(mktemp -d)
+    # go type
     if [ "$2" == "go" ]; then
         touch $cmd_output/go_test.go
         (cd $cmd_output && go mod init golang_test)
         (cd $cmd_output && echo -e "package go_test\nimport \"testing\"\nfunc TestName(t *testing.T) {\n\n}" > go_test.go)
         (cd $cmd_output && go fmt .)
     fi
+
     code $cmd_output
 fi
 
